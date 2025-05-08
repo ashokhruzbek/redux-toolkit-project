@@ -9,8 +9,10 @@ export const studentSlice = createSlice({
     name: "Talabalar",
     initialState: boshlangichQiymat,
     reducers:{
-        addStudent: ()=>{},
-        removeStudent: ()=>{},
+        addStudent: (state, action)=>{
+            state.items.push("Islombek")
+        },
+        removeStudent: (state)=>{},
     }
 })
 
