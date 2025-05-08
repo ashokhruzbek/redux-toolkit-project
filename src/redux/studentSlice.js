@@ -1,20 +1,24 @@
 import { createSlice } from "@reduxjs/toolkit"
 
-const boshlangichQiymat = {
-    items: ["Mirkomil", "Fazliddin","Said","Shoxruzbek", "Saydulloxon"]
-
+const initialValue = {
+    items: ["Mirkomil", "Fazliddin", "Said", "Shohruz"]
 }
 
 export const studentSlice = createSlice({
-    name: "Talabalar",
-    initialState: boshlangichQiymat,
-    reducers:{
-        addStudent: (state, action)=>{
+    name: "Students",
+    initialState: initialValue,
+    reducers: {
+        addStudent: (state, action) => {
             state.items.push(action.payload)
         },
-        removeStudent: (state)=>{},
+        // removeStudent: (state, action) => { 
+        //     state.items =  state.items.filter(name => name !== action.payload)
+        // }
+        removeStudent: (state, action) => {
+            state.items.splice(action.payload, 1)
+        }
     }
 })
 
-export const {addStudent, removeStudent} = studentSlice.actions;
-export default studentSlice.reducer;
+export const { addStudent, removeStudent } = studentSlice.actions
+export default studentSlice.reducer

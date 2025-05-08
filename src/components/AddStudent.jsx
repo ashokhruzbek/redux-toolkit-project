@@ -1,25 +1,37 @@
 import React, { useState } from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { addStudent } from '../redux/studentSlice'
-function AddStudent() {
-  const [student, setStudent] = useState('');
-  const students = useSelector(state => state.students.items);
-  const dispatch = useDispatch();
+import { useDispatch } from 'react-redux'
+import { addStudent, removeStudent } from '../redux/studentSlice'
+import "../App.css"
 
-  const handleAdd = () => {
-        students.includes(student) ? alert("Bu talaba mavjud") : dispatch(addStudent(student))
+const AddStudent = ({ students }) => {
+    const [name, setName] = useState("")
+    const dispatch = useDispatch()
+
+    const handleAdd = () => {
+        students.includes(name) ? alert("Student already exists") : dispatch(addStudent(name))
+        setName("")
     }
+
+    const handleRemove = (index) => dispatch(removeStudent(index))
+
     return (
         <div>
-      <input
-        type="text"
-        value={student}
-        onChange={(e) => setStudent(e.target.value)}
-        placeholder="Ism kiriting"
-        />
-      <button onClick={handleAdd}>Add Student</button>
-    </div>
-  )
+            <div>
+                <input
+                    type="text"
+                    value={name}
+                    onChange={(e) => setName(e.target.value)}
+                    placeholder="Enter student name"
+                />
+                <button onClick={handleAdd}>Add</button>
+            </div>
+            <div>
+                {students.map((student, index) => (
+                    <p key={index}>{student} <span className='cursor' onClick={() => handleRemove(index)}>❌</span></p>
+                ))}
+            </div>
+        </div>
+    )
 }
 
 export default AddStudent

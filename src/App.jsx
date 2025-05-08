@@ -1,14 +1,17 @@
-import React from 'react'
-import { useSelector } from 'react-redux'
-import AddStudent from './components/AddStudent';
+import React, { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import AddStudent from './components/addStudent'
 
-function App() {
-  const students = useSelector(state => state.students.items);
+const App = () => {
+  const students = useSelector(state => state.students.items)
   console.log(students);
+
+ 
+
   return (
     <div>
-      <h1>Talabalar Ro'yxati</h1>
-      <AddStudent />
+      <h1>App</h1>
+     <AddStudent students={students}/>
     </div>
   )
 }
