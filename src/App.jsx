@@ -1,20 +1,14 @@
 import React from 'react'
-import { useDispatch, useSelector } from 'react-redux'
-import { addStudent } from './redux/studentSlice';
+import { useSelector } from 'react-redux'
+import AddStudent from './components/AddStudent';
 
 function App() {
-  const students= useSelector(state=> state.students.items)
-  const dispatch = useDispatch()
+  const students = useSelector(state => state.students.items);
   console.log(students);
-
-  const handleAdd =()=>{
-    dispatch(addStudent());
-  }
-  
   return (
     <div>
-      <h1>App</h1>
-      <button onClick={handleAdd}>Add Student</button>
+      <h1>Talabalar Ro'yxati</h1>
+      <AddStudent />
     </div>
   )
 }
