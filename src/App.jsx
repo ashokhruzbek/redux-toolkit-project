@@ -1,21 +1,21 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { addStudent, removeStudent } from "./redux/studentSlice";
+import { removeStudent, setUsers } from "./redux/studentSlice";
 
 function App() {
-  const students = useSelector((state) => state.students.items);
+  const { users, loading, error } = useSelector((state) => state.students);
+
+  useEffect(() => {
+    dispatch(setUsers());
+  }, []);
 
   const dispatch = useDispatch();
   const [student, setStudent] = useState("");
-  
-  const handleAdd = () => {
-    students.includes(student)
-      ? alert("Bu talaba mavjud")
-      : dispatch(addStudent(student));
-  };
+
   const handleRemove = (index) => {
     dispatch(removeStudent(index));
   };
+
   return (
     <div>
       <h1>App</h1>
@@ -25,11 +25,14 @@ function App() {
         value={student}
         onChange={(e) => setStudent(e.target.value)}
       />
-      <button onClick={handleAdd}>Add Student</button>
+      {/* <button onClick={handleAdd}>Add Student</button> */}
+
+      {loading && <h4>Loading...</h4>}
+      {error && <h4>{error}</h4>}
       <div className="students-container">
-        {students.map((student, index) => (
-          <h2>
-            {student}
+        {users.map((user, index) => (
+          <h2 key={user.id}>
+            {user.name}
             <span onClick={() => handleRemove(index)}>❌</span>
           </h2>
         ))}
