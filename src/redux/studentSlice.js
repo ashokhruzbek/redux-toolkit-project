@@ -1,13 +1,16 @@
 import { createSlice } from "@reduxjs/toolkit"
 
 const initialValue = {
-    items: ["Mirkomil", "Fazliddin", "Said", "Shohruz"]
+    items: []
 }
 
 export const studentSlice = createSlice({
     name: "Students",
     initialState: initialValue,
     reducers: {
+        setUsers: (state,action)=>{
+            state.items = action.payload
+        },
         addStudent: (state, action) => {
             state.items.push(action.payload)
         },
