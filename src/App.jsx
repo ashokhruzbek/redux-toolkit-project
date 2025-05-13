@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { removeStudent, setUsers } from "./redux/studentSlice";
+import { fetchUsers, removeStudent } from "./redux/studentSlice";
 
 function App() {
   const { users, loading, error } = useSelector((state) => state.students);
 
   useEffect(() => {
-    dispatch(setUsers());
+    dispatch(fetchUsers());
   }, []);
 
   const dispatch = useDispatch();
